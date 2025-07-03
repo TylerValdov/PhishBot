@@ -10,11 +10,12 @@ from google.genai import types
 import logging
 import json
 import re
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
+#Load gemini, mongo, & fastapi
 genai_client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
-
 app = FastAPI()
 client = MongoClient("mongodb://mongo:27017")
 db = client.phishing_app
@@ -39,7 +40,7 @@ async def analyze_email(req: EmailRequest):
             model="gemini-2.5-flash", 
             contents=prompt)
 
-        # Gemini just returns text, so we parse
+        # Parse gemini response
         text_output = response.text
         print("Raw Gemini response:", repr(text_output)) 
         ai_result = json.loads(text_output)
@@ -68,10 +69,9 @@ async def analyze_email(req: EmailRequest):
     return response_doc
     
 def clean_gemini_response(text: str) -> str:
-    # Remove ```json and ``` (code block markers)
+    # Remove json markers & whitespace just in case
     text = re.sub(r"```json\s*", "", text)
     text = re.sub(r"```", "", text)
-    # Optionally strip whitespace
     text = text.strip()
     return text
 
@@ -82,3 +82,11 @@ async def get_history():
         if "_id" in scan:
             scan["_id"] = str(scan["_id"])
     return scans
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
