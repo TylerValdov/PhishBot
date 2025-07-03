@@ -1,6 +1,6 @@
-# Phishing Detector
+# PhishBot
 
-🚀 **Phishing Detector** is a full-stack web app that analyzes emails using Google's Gemini AI and flags potential phishing risks.  
+🚀 **PhishBot** is a full-stack web app that analyzes emails using Google's Gemini AI and flags potential phishing risks.  
 It stores analysis results in MongoDB and provides a history view — perfect for quickly checking suspicious messages.
 
 ---
@@ -10,12 +10,12 @@ It stores analysis results in MongoDB and provides a history view — perfect fo
 ✅ Submit email text and receive:
 - A **risk score** (0-100)  
 - A **short summary** of concerns  
-- A list of **specific flags** (like "Unexplained Call to Action")
+- A list of **specific flags** common in phishing emails (like "Unexplained Call to Action")
 
 ✅ See the **history of your last 10 checks**.
 
 ✅ Built with:
-- ⚛️ React frontend (clean textarea + result display)
+- ⚛️ HTML/CSS/JS frontend on chrome extension
 - ⚡ FastAPI backend (Python)
 - 🐳 Dockerized microservices (API + MongoDB)
 - ☁️ Ready to deploy on EC2 or any cloud VM
@@ -26,7 +26,7 @@ It stores analysis results in MongoDB and provides a history view — perfect fo
 
 | Layer         | Tech                                |
 |---------------|------------------------------------|
-| Frontend      | React, JavaScript, Fetch API       |
+| Frontend      | HTML, CSS, JavaScript, Fetch API   |
 | Backend       | FastAPI (Python), Google Gemini AI |
 | Database      | MongoDB                            |
 | DevOps        | Docker, Docker Compose             |

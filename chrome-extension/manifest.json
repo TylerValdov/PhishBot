@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Phishing Detector",
+  "name": "PhishBot",
   "version": "1.0",
   "description": "Analyze emails for phishing risk using Gemini AI.",
   "permissions": ["activeTab", "scripting"],
