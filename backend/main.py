@@ -26,7 +26,7 @@ class EmailRequest(BaseModel):
 @app.post("/analyze")
 async def analyze_email(req: EmailRequest):
     prompt = f"""
-    You are a phishing detection expert. Given the email below, provide:
+    You are a phishing detection expert. The date is {datetime.today()} for your analysis information. Given the email below, provide:
     {{
       "risk_score": <0-100>,
       "summary": "<short summary>",
