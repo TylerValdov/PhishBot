@@ -6,13 +6,13 @@ document.getElementById("scanBtn").addEventListener("click", async () => {
 
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
-    files: ["content.js"]
+    function: extractEmailContent
   }, async (results) => {
     const emailText = results[0].result;
 
     if (!emailText) {
       document.getElementById("loading").style.display = "none";
-      document.getElementById("result").innerHTML = "⚠️ No email content found.";
+      document.getElementById("result").innerHTML = "No email content found.";
       return;
     }
 
@@ -38,7 +38,13 @@ document.getElementById("scanBtn").addEventListener("click", async () => {
     } catch (err) {
       console.error(err);
       document.getElementById("loading").style.display = "none";
-      document.getElementById("result").innerHTML = "🚨 Error analyzing email.";
+      document.getElementById("result").innerHTML = "Error analyzing email.";
     }
   });
 });
+
+function extractEmailContent() {
+  // Gmail-specific selector for email body
+  let emailBody = document.querySelector(".a3s")?.innerText || "";
+  return emailBody;
+}
